@@ -1,0 +1,127 @@
+import requests
+from colorama import Fore,Back
+import time
+import sys as n
+import time as mm
+import secrets
+from user_agent import generate_user_agent
+def slow(M):
+	for c in M + '\n':
+		n.stdout.write(c)
+		n.stdout.flush()
+		mm.sleep(0.60/ 120)
+
+slow(f'''{Fore.CYAN}
+   ███╗   ███╗███████╗████████╗ █████╗ 
+   ████╗ ████║██╔════╝╚══██╔══╝██╔══██╗
+   ██╔████╔██║█████╗     ██║   ███████║
+   ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║
+   ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║
+   ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝
+   ┌─┐┌─┐┌┬┐┌─┐┌─┐┬ ┬┌─┐┌┬┐┌─┐  ┌─┐┌┐┌┌┬┐
+   │  │ │ ││├┤ └─┐└┬┘├─┤ │ ├┤   │ ││││ ││
+   └─┘└─┘─┴┘└─┘└─┘ ┴ ┴ ┴ ┴ └─┘  └─┘┘└┘─┴┘
+{Fore.YELLOW}╔══════════════════════════════════════════════════════════╗
+{Fore.WHITE}     Programmer : مرتضى
+{Fore.WHITE}     Telegram Channel : @Murtaza602
+{Fore.WHITE}     Instagram : @hd34
+{Fore.YELLOW}╚══════════════════════════════════════════════════════════╝
+''')
+
+print(Fore.YELLOW+'______'*10)
+
+kaito = input('''
+
+(1) استخراج السيزن ايدي 
+
+(2) استخراج الهيدرز 
+
+(3) استخراج انشاء الحساب 
+
+
+
+''')
+if kaito >='4':
+	print('اختر رقم من 1 الى 3 ..!')
+
+if kaito =='1':
+	USER = input(Fore.GREEN+'حط اسم المستخدم :')
+	PASS = input(Fore.GREEN+'حط كلمه المرور :')
+	url = 'https://www.instagram.com/accounts/login/ajax/'
+	headers = {
+        "accept": "*/*",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US,en;q=0.9",
+        "content-length": "385",
+        "content-type": "application/x-www-form-urlencoded",
+        "cookie": "csrftoken=Lk9Lfwj0Hp0T3zCBYwjoeGBUBjU1sVXC; mid=YSuaiwAEAAEzvEB8maY7IzJ6MDzJ; ig_did=07753880-8B96-4C09-93E9-BA39B801DD08",
+        "origin": "https://www.instagram.com",
+        "referer": "https://www.instagram.com/accounts/login/",
+        "sec-ch-ua": '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+        "x-asbd-id": "437806",
+        "x-csrftoken": "Lk9Lfwj0Hp0T3zCBYwjoeGBUBjU1sVXC",
+        "x-ig-app-id": "936619743392459",
+        "x-ig-www-claim": "0",
+        "x-instagram-ajax": "56f3c2d2a823",
+        "x-requested-with": "XMLHttpRequest"
+    }
+	data = {
+        "username": f"{USER}",
+        "enc_password": f"#PWD_INSTAGRAM_BROWSER:0:1613414957:{PASS}",
+        "queryParams": "{}",
+        "optIntoOneTap": "false"
+    }
+
+	req_login = requests.post(url, headers=headers, data=data)
+	if '"authenticated":false' in req_login.text:
+		print(Fore.RED+'[!] Username Or Password Is Error..! -')
+		exit(0)
+	elif '"authenticated":true' in req_login.text:
+		print(Fore.GREEN+'[+] Done Login')
+	sess = req_login.cookies['sessionid']
+	time.sleep(1)
+	with open('sessionid.txt','a') as s:
+		s.write(f"{sess}\n")
+		print(Fore.MAGENTA+'تم حفظ السيزن ايدي في ملف sessionid.txt [+]')
+
+elif kaito == '2':
+	kaito1 = input(Fore.GREEN+'حط اي يوزر :')
+	kaitopass = 'hhhjshshshshh'
+	url = 'https://www.instagram.com/accounts/login/ajax/'
+	payload = {
+		"username": f"{kaito1}",
+		"enc_password": f"#PWD_INSTAGRAM_BROWSER:0:1613414957:{kaitopass}",
+		"queryParams": "{}",
+		"optIntoOneTap": "false"
+		}
+	heds = requests.get(url,data=payload)
+	khea = (heds.headers)
+	with open('headers.txt','a') as H:
+		H.write(f"{khea}")
+		print(Fore.MAGENTA+'تم حفظ الهيدرز بملف اسمه headers.txt [+]')
+	
+elif kaito=='3':
+	user = input(Fore.GREEN+'حط يوزر  : ')
+	head = {
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9,ar;q=0.8',
+    'cookie': f'csrftoken={secrets.token_hex(8)*2}; sessionid={secrets.token_hex(8)*2};',
+    'user-agent': generate_user_agent(),
+    }
+	info_user = f'https://www.instagram.com/{user}/?__a=1'
+	req = requests.get(info_user,headers=head).json()
+	user_id = str(req['logging_page_id']).split('_')[1]
+
+	get_created = f'https://o7aa.pythonanywhere.com/?id={user_id}'
+
+	get_info = requests.get(get_created)
+	ren = get_info.json()
+	date = ren['data']
+	wls = ren['id']
+	print(Fore.BLUE+f'انشاء الحساب : {date} | ايدي الحساب : {wls}')
